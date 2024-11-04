@@ -29,11 +29,25 @@ The training pipeline  is efficient because it combines optimal configurations o
 and adaptive optimizers, resulting in faster convergence and lower overall training times without sacrificing accuracy.
 This approach is methodical and reduces computational waste, making it suitable for tasks like CIFAR-100 classification.
 
+
+
+- The pipeline includes a range of optimizers (SGD, Adam, AdamW, and RMSprop) with appropriate learning rate schedulers. Testing different combinations helped identify the optimal setup, leading to faster convergence without excessive tuning.
+For instance, AdamW with StepLR achieved the best results in terms of both convergence speed and accuracy. Using adaptive optimizers like AdamW allows for fewer adjustments to learning rates, which is time-efficient.
+
+
+- The StepLR and CosineAnnealingLR schedulers control the learning rate dynamically, reducing the need for constant manual adjustment. This allows the model to gradually adapt and prevent stagnation in training, which is crucial for large datasets like CIFAR-100.
+StepLR in particular helped stabilize training, as it reduces the learning rate at regular intervals, ensuring efficiency in later training stages.
+
+
+- Data augmentation was used selectively. While augmentations like Random Erasing and Vertical Flip were included, not all configurations relied heavily on augmentations. This minimized unnecessary transformations that could increase computation without a proportionate improvement in accuracy.
+By testing which augmentations are most effective, the pipeline avoids redundant transformations, saving both processing time and GPU memory.
+
 ## Achieving 0.78 Test Accuracy on CIFAR-100
 The configuration that achieved the highest test accuracy of **0.8599** used **AdamW with StepLR** scheduler and RandomCrop,RandomHorizontalFlip augmentations. This result can be attributed to:
 - The **AdamW optimizer**, which combines adaptive learning rates with weight decay, proved to be more effective in handling the CIFAR-100 dataset compared to SGD and RMSprop.
 - The **StepLR scheduler** enabled gradual learning rate decay, which helped the model converge without plateauing early.
 - **Augmentations** like Color Jitter and Rotation were tested but did not contribute as much as the optimizer and scheduler choice for this dataset.
+
 
 ## Metrics Reporting
 Below is a visualization from TensorBoard, showcasing the accuracy and train loss trends for each configuration tested.
