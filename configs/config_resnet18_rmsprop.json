@@ -1,0 +1,27 @@
+{
+    "config_name": "resnet18_rmsprop",
+    "dataset": "CIFAR-100",
+    "batch_size": 64,
+    "epochs": 50,
+    "num_classes": 100,
+    "model": "resnet18",
+    "augmentations": [
+        {"name": "RandomCrop", "size": 32, "padding": 4},
+        {"name": "RandomHorizontalFlip"}
+    ],
+    "optimizer": {
+        "name": "rmsprop",
+        "lr": 0.001,
+        "alpha": 0.9
+    },
+    "scheduler": {
+        "name": "CosineAnnealingLR",
+        "T_max": 10
+    },
+    "logging": {
+        "type": "tensorboard"
+    },
+    "early_stopping": {
+        "patience": 5
+    }
+}

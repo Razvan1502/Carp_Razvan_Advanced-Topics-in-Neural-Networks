@@ -1,0 +1,24 @@
+{
+  "config_name": "mnist_mlp_adam",
+  "model": "mlp",
+  "num_classes": 10,
+  "dataset": "MNIST",
+  "batch_size": 64,
+  "epochs": 10,
+  "optimizer": {
+    "name": "adam",
+    "lr": 0.001
+  },
+  "scheduler": {
+    "name": "StepLR",
+    "step_size": 5,
+    "gamma": 0.1
+  },
+  "logging": {
+        "type": "tensorboard"
+  },
+  "early_stopping": {
+    "patience": 3
+  },
+  "augmentations": {}
+}

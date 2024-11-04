@@ -1,0 +1,30 @@
+{
+    "config_name": "resnet18_sgd_random_erasing_vertical_flip.json",
+    "dataset": "CIFAR-100",
+    "batch_size": 64,
+    "epochs": 50,
+    "num_classes": 100,
+    "model": "resnet18",
+    "augmentations": [
+        {"name": "RandomErasing", "p": 0.5, "scale": [0.02, 0.33], "ratio": [0.3, 3.3]},
+        {"name": "RandomVerticalFlip"},
+        {"name": "RandomCrop", "size": 32, "padding": 4}
+    ],
+    "optimizer": {
+        "name": "sgd",
+        "lr": 0.03,
+        "momentum": 0.9,
+        "weight_decay": 5e-4,
+        "nesterov": true
+    },
+    "scheduler": {
+        "name": "CosineAnnealingLR",
+        "T_max": 10
+    },
+    "logging": {
+        "type": "tensorboard"
+    },
+    "early_stopping": {
+        "patience": 4
+    }
+}

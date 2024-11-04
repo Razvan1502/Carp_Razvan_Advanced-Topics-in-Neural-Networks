@@ -1,0 +1,28 @@
+{
+    "config_name": "resnet18_adam_stepLR",
+    "dataset": "CIFAR-100",
+    "batch_size": 64,
+    "augmentations": [
+        {"name": "RandomCrop", "size": 32, "padding": 4},
+        {"name": "RandomHorizontalFlip"}
+    ],
+    "model": "resnet18",
+    "num_classes": 100,
+    "optimizer": {
+        "name": "adam",
+        "lr": 0.001
+    },
+    "scheduler": {
+        "name": "StepLR",
+        "step_size": 10,
+        "gamma": 0.1
+    },
+    "early_stopping": {
+        "patience": 5,
+        "min_delta": 0.001
+    },
+    "epochs": 50,
+    "logging": {
+        "type": "tensorboard"
+    }
+}

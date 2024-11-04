@@ -1,0 +1,29 @@
+{
+    "config_name": "resnet18_adamw_color_jitter_rotation.json",
+    "dataset": "CIFAR-100",
+    "batch_size": 64,
+    "epochs": 50,
+    "num_classes": 100,
+    "model": "resnet18",
+    "augmentations": [
+        {"name": "ColorJitter", "brightness": 0.2, "contrast": 0.2, "saturation": 0.2, "hue": 0.1},
+        {"name": "RandomRotation", "degrees": 15},
+        {"name": "RandomHorizontalFlip"}
+    ],
+    "optimizer": {
+        "name": "adamw",
+        "lr": 0.0001,
+        "weight_decay": 0.0001
+    },
+    "scheduler": {
+        "name": "StepLR",
+        "step_size": 5,
+        "gamma": 0.5
+    },
+    "logging": {
+        "type": "tensorboard"
+    },
+    "early_stopping": {
+        "patience": 5
+    }
+}
